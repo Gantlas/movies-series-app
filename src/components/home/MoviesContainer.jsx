@@ -8,11 +8,13 @@ export class MoviesContainer extends Component {
     const { movies } = this.props;
     return (
       <div className="row">
-        {movies?.length > 0
-          ? movies.map((movie) => (
-              <MovieCard movie={movie} key={movie.imdbID} />
-            ))
-          : null}
+        {movies.Response === "True" ? (
+          movies.Search.map((movie) => (
+            <MovieCard movie={movie} key={movie.imdbID} />
+          ))
+        ) : (
+          <div className="text-center m-auto fa-lg">{movies.Error}</div>
+        )}
       </div>
     );
   }

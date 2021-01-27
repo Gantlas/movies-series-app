@@ -1,4 +1,9 @@
-import { FETCH_MOVIES, SERACH_MOVIE } from "../actions/types";
+import {
+  FETCH_MOVIES,
+  SERACH_MOVIE,
+  FETCH_MOVIE,
+  LOADING,
+} from "../actions/types";
 
 const initialState = {
   text: "",
@@ -7,7 +12,7 @@ const initialState = {
   movie: [],
 };
 
-export default function (state = initialState, action) {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SERACH_MOVIE:
       return {
@@ -19,8 +24,20 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movies: action.payload,
+        loading: false,
+      };
+    case FETCH_MOVIE:
+      return {
+        ...state,
+        movie: action.payload,
+        loading: false,
+      };
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;
   }
-}
+};
